@@ -1,0 +1,22 @@
+Empresa: Tech Innovators
+Proyecto: Proyecto Alpha
+Proyecto: Proyecto Beta
+Proyecto: Proyecto Gamma
+Proyecto: Proyecto Delta
+Proyecto: Proyecto Omega
+
+Empleado: Juan Perez, 12345678, 555-1234, juan.perez@mail.com, Developer, Proyecto Alpha
+Empleado: Maria Lopez, 87654321, 555-5678, maria.lopez@mail.com, Designer, Proyecto Beta
+Empleado: Luis García, 23456789, 555-9876, luis.garcia@mail.com, Tester, Proyecto Alpha
+Empleado: Sofia Martinez, 98765432, 555-4321, sofia.martinez@mail.com, Developer, Proyecto Gamma
+Empleado: Carlos Ruiz, 34567890, 555-8765, carlos.ruiz@mail.com, Designer, Proyecto Delta
+Empleado: Ana Gomez, 56789012, 555-5432, ana.gomez@mail.com, Tester, Proyecto Gamma
+Empleado: Rodrigo Fernandez, 65432109, 555-0987, rodrigo.fernandez@mail.com, Developer, Proyecto Omega
+Empleado: Lucia Navarro, 78901234, 555-2109, lucia.navarro@mail.com, Designer, Proyecto Beta
+Empleado: Pablo Castro, 89012345, 555-3210, pablo.castro@mail.com, Tester, Proyecto Delta
+Empleado: Carla Ortiz, 23456780, 555-8760, carla.ortiz@mail.com, Developer, Proyecto Omega
+Empleado: Martina Soto, 12345679, 555-6543, martina.soto@mail.com, Designer, Proyecto Gamma
+Empleado: Felipe Rios, 43210987, 555-1230, felipe.rios@mail.com, Tester, Proyecto Beta
+Empleado: Ignacio Silva, 87654320, 555-4567, ignacio.silva@mail.com, Developer, Proyecto Delta
+Empleado: Paula Fuentes, 34567892, 555-7890, paula.fuentes@mail.com, Designer, Proyecto Omega
+Empleado: Diego Torres, 56789023, 555-8762, diego.torres@mail.com, Tester, Proyecto Alpha
