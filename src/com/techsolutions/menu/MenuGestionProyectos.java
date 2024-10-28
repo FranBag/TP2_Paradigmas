@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import classes.Company;
 import classes.Project;
-import classes.Task;
 import utilities.Clear;
 import utilities.MessagePrinter;
 

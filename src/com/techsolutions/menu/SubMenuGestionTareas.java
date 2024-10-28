@@ -3,7 +3,6 @@ package menu;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import classes.Company;
 import classes.DirectAssignmentStrategy;
 import classes.Project;
 import classes.RandomAssignmentStrategy;

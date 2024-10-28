@@ -7,7 +7,6 @@ import people.Employee;
 import people.EmployeeFactory;
 
 import classes.Company;
-import people.EmployeeFactory;
 
 public class TxtFileAdapter {
 

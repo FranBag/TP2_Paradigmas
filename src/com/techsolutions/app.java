@@ -1,6 +1,4 @@
 import classes.Company;
-import people.Employee;
-import people.EmployeeFactory;
 import utilities.Clear;
 import utilities.TxtFileAdapter;
 import utilities.MessagePrinter;
@@ -8,7 +6,6 @@ import menu.MenuGestionClientes;
 import menu.MenuGestionEmpleados;
 import menu.MenuGestionProyectos;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class app {

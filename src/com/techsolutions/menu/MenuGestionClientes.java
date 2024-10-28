@@ -1,6 +1,5 @@
 package menu;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import classes.Company;

@@ -1,6 +1,5 @@
 package classes;
 
-import java.security.MessageDigest;
 import java.util.Random;
 
 import people.Employee;
