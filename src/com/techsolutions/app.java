@@ -14,8 +14,6 @@ import people.Manager;
 
 import java.util.Scanner;
 
-import javax.naming.ldap.ManageReferralControl;
-
 public class app {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -60,10 +58,15 @@ public class app {
         cliente.setProject(proyecto1);
 
         // Añadiendo tareas a empleados
-        tarea1.addEmployee(empleado1); 
+        tarea1.attach(empleado1); 
+        tarea1.addEmployee(empleado1);
         empleado1.addMyTask(tarea1);
+
+        tarea2.attach(empleado2);
         tarea2.addEmployee(empleado2);
         empleado2.addMyTask(tarea2);
+
+        tarea3.attach(empleado3);
         tarea3.addEmployee(empleado3);
         empleado3.addMyTask(tarea3);
 

@@ -28,6 +28,6 @@ public abstract class Employee extends Person implements Observer{
 
     @Override
     public void update(String taskName, String newStatus) {
-        System.out.println("Aviso: La tarea " + taskName + " ha cambiado su estado a: " + newStatus);
+        System.out.println("Avisando a " + getName() + ": La tarea " + taskName + " cambió su estado a: " + newStatus);
     }
 }
