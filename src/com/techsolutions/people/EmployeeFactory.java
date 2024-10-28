@@ -1,10 +1,10 @@
 package people;
 
-import utilities.MyException;
 import classes.Company;
+import utilities.MessagePrinter;
 
 public class EmployeeFactory {
-    public static Employee createEmployee(String name, String dni, String phone, String email, String rol) throws MyException{
+    public static Employee createEmployee(String name, String dni, String phone, String email, String rol){
         switch (rol) {
             case "Designer":
                 return createDesigner(name, dni, phone, email);
@@ -13,7 +13,8 @@ public class EmployeeFactory {
             case "Tester":
                 return createTester(name, dni, phone, email);
             default:
-                throw new MyException("Rol ingresado inexistente");
+                MessagePrinter.error("Error al crear empleado");
+                return null;
         }
     }
     

@@ -3,6 +3,7 @@ import people.Employee;
 import people.EmployeeFactory;
 import utilities.Clear;
 import utilities.TxtFileAdapter;
+import utilities.MessagePrinter;
 import menu.MenuGestionClientes;
 import menu.MenuGestionEmpleados;
 import menu.MenuGestionProyectos;
@@ -16,8 +17,6 @@ public class app {
         Company company = Company.getInstance();
 
         TxtFileAdapter adapter = new TxtFileAdapter();
-        // Company company = adapter.readCompanyData();
-        // TxtFileAdapter adapter = new TxtFileAdapter("ruta_del_archivo.txt");
 
         company.setName("Twice Entertainment");
         company.createProject("Comer sandía");
@@ -48,8 +47,7 @@ public class app {
             try {
                 selection = Integer.parseInt(input.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println("Por favor, ingrese un número valido.");
-                input.nextLine();
+                MessagePrinter.error();
                 continue;
             }
 
@@ -71,11 +69,10 @@ public class app {
                     adapter.readCompanyData();
                     break;
                 default:
-                    System.out.println("Valor inválido.");
-                    input.nextLine();
+                    MessagePrinter.error();
                     break;
             }
-            // Clear.clearScreen();
+            Clear.clearScreen();
         }
     }
 }

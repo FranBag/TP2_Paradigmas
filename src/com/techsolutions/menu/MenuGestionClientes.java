@@ -7,6 +7,7 @@ import classes.Company;
 import classes.Project;
 import people.Customer;
 import utilities.Clear;
+import utilities.MessagePrinter;
 
 public class MenuGestionClientes{
     static Scanner input = new Scanner(System.in);
@@ -26,12 +27,16 @@ public class MenuGestionClientes{
         try{
             selection = Integer.parseInt(input.nextLine());
         }catch(NumberFormatException e){
-            System.out.println("Por favor, ingrese un número valido.");
+            MessagePrinter.error();
+            start();
+            return;
         }
         switch(selection) {
             case 0:
                 return;
+
             case 1:{
+                Clear.clearScreen();
                 System.out.println("Nombre del cliente:");
                 String name = input.nextLine();
                 System.out.println("DNI:");
@@ -40,19 +45,21 @@ public class MenuGestionClientes{
                 String phone = input.nextLine();
                 System.out.println("Email:");
                 String email = input.nextLine();
+
                 if (name.isEmpty() || dni.isEmpty() || phone.isEmpty() || email.isEmpty()) {
-                    System.out.println("Todos los campos son obligatorios.");}
-                    else{
-                        Customer newCustomer = new Customer(name, dni, phone, email, Company.getInstance().getSizeCustomers()+1);
+                    MessagePrinter.error("Todos los campos son obligatorios");
+                }
+                else{
+                    Customer newCustomer = new Customer(name, dni, phone, email, Company.getInstance().getSizeCustomers() + 1);
                     Company.getInstance().addCustomer(newCustomer);
-                    System.out.println("Cliente " + name + " creado.");
-                    }
-                input.nextLine();
+                    MessagePrinter.log("Cliente " + name + " creado.");
+                }
+
                 start();
                 return;
-                
             }
             case 2:{
+                Clear.clearScreen();
                 for (Customer customer : Company.getInstance().getCustomers()) {
                     System.out.println("Nombre: " + customer.getName()  + " | DNI: " + customer.getDni());
                 }
@@ -71,29 +78,29 @@ public class MenuGestionClientes{
                         Project project = Company.getInstance().getProjectByID(id_Project);
                         project.setCustomer(customer);
                         customer.setProject(project);
-                        System.out.println("Se ha asignado a " + customer.getName() + " al proyecto " + project.getName());
+                        MessagePrinter.log("Se ha asignado a " + customer.getName() + " al proyecto " + project.getName());
                     }catch(NumberFormatException e){
-                        System.out.println("Por favor, ingrese un número valido.");
-
+                        MessagePrinter.error();
                     }
                 }catch(NullPointerException e){
-                    System.out.println("Ingrese un valor correcto.");
+                    MessagePrinter.error();
                 }
-                input.nextLine();
                 start();
                 return;
             }
             case 3:{
+                Clear.clearScreen();
                 System.out.println("Listando todos los clientes:\n");
                 for (Customer customer : Company.getInstance().getCustomers()) {
                     String projectName = (customer.getProject() != null) ? customer.getProject().getName() : "No asignado";
                     System.out.println("Nombre: " + customer.getName()  + " | Proyecto: " + projectName);
                 }
-                input.nextLine();
+                MessagePrinter.log();
                 start();
                 return;
             }
             case 4:{
+                Clear.clearScreen();
                 for (Customer customer : Company.getInstance().getCustomers()) {
                     System.out.println("Nombre: " + customer.getName()  + " | DNI: " + customer.getDni());
                 }
@@ -105,16 +112,15 @@ public class MenuGestionClientes{
                     System.out.println("Datos del cliente " + customer.getName());
                     System.out.println("DNI:" + customer.getDni() + " | Proyecto: " + projectName);
                     System.out.println("Telefono: " + customer.getPhone() + " | Email: " + customer.getEmail());
+                    MessagePrinter.log();
                 }catch(NullPointerException e){
-                    System.out.println("No existe un cliente con ese DNI.");
+                    MessagePrinter.error("No existe un cliente con ese DNI");
                 }
-                input.nextLine();
                 start();
                 return;
             }
             default:
-                System.out.println("Valor incorrecto");
-                input.nextLine();
+                MessagePrinter.error();
                 start();
                 return;
 

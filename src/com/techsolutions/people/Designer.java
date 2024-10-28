@@ -8,6 +8,11 @@ public class Designer extends Employee{
 
     @Override
     public void trabajar(){
-    
+        System.out.println("Estoy diseñando algo.");
+    }
+
+    @Override
+    public String getRole(){
+        return "Designer";
     }
 }

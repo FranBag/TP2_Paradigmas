@@ -18,6 +18,8 @@ public abstract class Employee extends Person implements Observer{
 
     public abstract void trabajar();
 
+    public abstract String getRole();
+
     public List<Task> getTasks() { return tasks; }
 
     public void addMyTask(Task task) {

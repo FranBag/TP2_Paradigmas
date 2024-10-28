@@ -1,12 +1,14 @@
 package menu;
 
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 
 import classes.Company;
 import classes.Project;
 import classes.Task;
 import utilities.Clear;
+import utilities.MessagePrinter;
 
 public class MenuGestionProyectos{
     static Scanner input = new Scanner(System.in);
@@ -26,25 +28,28 @@ public class MenuGestionProyectos{
         try{
             selection = Integer.parseInt(input.nextLine());
         }catch(NumberFormatException e){
-            System.out.println("Por favor, ingrese un número valido.");
+            MessagePrinter.error();
+            start();
+            return;
         }
         switch(selection) {
             case 0:
                 return;
             case 1:{
+                Clear.clearScreen();
                 System.out.println("Nombre del nuevo proyecto:");
                 String projectName = input.nextLine();
                 if(projectName == ""){
-                    System.out.println("Nombre invalido");
-                    start();
-                    return;
+                    MessagePrinter.error("Nombre no válido");
+                }else{
+                    Company.getInstance().createProject(projectName);
+                    MessagePrinter.log("Se ha creado el proyecto " + projectName);
                 }
-                Company.getInstance().createProject(projectName);
-                input.nextLine();
                 start();
                 return;
             }
             case 2:{
+                Clear.clearScreen();
                 System.out.println("Listando todos los proyectos:\n");
                 for (Project project : Company.getInstance().getProjects()) {
                     String customerName = (project.getCustomer() != null) ? project.getCustomer().getName() : "No asignado";
@@ -52,11 +57,12 @@ public class MenuGestionProyectos{
                     System.out.println("\nNombre: " + project.getName() + " | ID: " + project.getId() +
                     "\nCliente: " + customerName + " | Gerente: " + managerName);
                 }
-                input.nextLine();
+                MessagePrinter.log();
                 start();
                 return;
             }
             case 3: {
+                Clear.clearScreen();
                 for (Project project : Company.getInstance().getProjects()) {
                     System.out.println("Nombre: " + project.getName() + " | ID: " + project.getId());
                 }
@@ -64,79 +70,54 @@ public class MenuGestionProyectos{
                 try {
                     int id_Project = input.nextInt();
                     input.nextLine();
-                    
-                    if (id_Project >= 1 && id_Project <= Company.getInstance().getProjects().size()) {
-                        Project project = Company.getInstance().getProjectByID(id_Project);
+                    Project project = Company.getInstance().getProjectByID(id_Project);
+                    if (project != null){
+                        Clear.clearScreen();
                         String customerName = (project.getCustomer() != null) ? project.getCustomer().getName() : "No asignado";
                         String managerName = (project.getManager() != null) ? project.getManager().getName() : "No asignado";
                         System.out.println("Resumen del proyecto " + project.getName());
                         System.out.println("ID: " + project.getId() + " | Cantidad de empleados: " + project.getEmployees().size());
                         System.out.println("Cliente: " + customerName + " | Gerente: " + managerName);
                         System.out.println("Cantidad total de tareas: " + project.getTasks().size());
-
-                        // Contar tareas según su estado
-                        int pendientes = 0;
-                        int enProgreso = 0;
-                        int completadas = 0;
-                        for (Task task : project.getTasks()) {
-                            switch (task.getStatus()) {
-                                case "PENDIENTE":
-                                    pendientes++;
-                                    break;
-                                case "EN PROGRESO":
-                                    enProgreso++;
-                                    break;
-                                case "COMPLETADA":
-                                    completadas++;
-                                    break;
-                                default:
-                                    break;
-                            }
+                        Map<String, Integer> taskStatusCounts = project.getTaskCountByStatus();
+                        System.out.println("Cantidad de tareas por estado:");
+                        for (Map.Entry<String, Integer> entry : taskStatusCounts.entrySet()) {
+                            System.out.println("- " + entry.getKey() + ": " + entry.getValue());
                         }
-
-                        // Mostrar resumen de tareas por estado
-                        System.out.println("Tareas PENDIENTES: " + pendientes);
-                        System.out.println("Tareas EN PROGRESO: " + enProgreso);
-                        System.out.println("Tareas COMPLETADAS: " + completadas);
-                    } else {
-                        System.out.println("Por favor, ingrese un número dentro del rango 1 y " + Company.getInstance().getProjects().size());
+                        MessagePrinter.log();
+                    }else{
+                        MessagePrinter.error();
                     }
-                } catch (InputMismatchException e) {
-                    System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                    input.next();
+                }catch(InputMismatchException e){
+                    MessagePrinter.error();
                 }
-                input.nextLine();
                 start();
                 return;
             }
 
-
-
             case 4:{
-                for (Project project : Company.getInstance().getProjects()) {
+                Clear.clearScreen();
+                for(Project project : Company.getInstance().getProjects()){
                     System.out.println("Nombre: " + project.getName() + " | ID: " + project.getId());
                 }
                 System.out.println("Ingrese ID de proyecto: ");
-                try {
+                try{
                     int id_Project = input.nextInt();
-                input.nextLine();
-                    
-                    if (id_Project >= 1 && id_Project <= Company.getInstance().getProjects().size()) {
-                        Project project = Company.getInstance().getProjectByID(id_Project);
+                    input.nextLine();
+                    Project project = Company.getInstance().getProjectByID(id_Project);
+                    if (project != null){
                         SubMenuGestionTareas.start(project);
-                    } else {
-                        System.out.println("Por favor, ingrese un número dentro del rango 1 y " + Company.getInstance().getProjects().size());
-                    } } catch (InputMismatchException e) {
-                        System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                        input.next();
+                    }else{
+                        MessagePrinter.error();
                     }
-                input.nextLine();
+                }catch(InputMismatchException e){
+                    MessagePrinter.error();
+                }
                 start();
                 return;
             }
             default:
-                System.out.println("Valor incorrecto");
-                input.nextLine();
+                MessagePrinter.error();
                 start();
                 return;
         }

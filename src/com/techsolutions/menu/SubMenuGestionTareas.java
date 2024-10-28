@@ -10,6 +10,7 @@ import classes.RandomAssignmentStrategy;
 import classes.Task;
 import people.Employee;
 import utilities.Clear;
+import utilities.MessagePrinter;
 
 public class SubMenuGestionTareas {
     static Scanner input = new Scanner(System.in);
@@ -30,72 +31,89 @@ public class SubMenuGestionTareas {
         try{
             selection = Integer.parseInt(input.nextLine());
         }catch(NumberFormatException e){
-            System.out.println("Por favor, ingrese un número valido.");
+            MessagePrinter.error();
+            start(project);
+            return;
         }
         switch(selection) {
             case 0:
                 return;
             case 1:{
+                Clear.clearScreen();
                 System.out.println("Nombre de nueva tarea:");
                 String taskName = input.nextLine();
-                project.addTask(taskName);
-                input.nextLine();
+                if(taskName != ""){
+                    project.addTask(taskName);
+                    MessagePrinter.log("Se ha creado la tarea " + taskName + " en " + project.getName());
+                }else{
+                    MessagePrinter.error("Nombre ingresado no valido");
+                }
                 start(project);
                 return;
             }
             case 2:{
+                Clear.clearScreen();
                 System.out.println("Listando todas las tareas de " + project.getName() + ":\n");
                 for (Task task : project.getTasks()){
                     System.out.println("\nNombre: " + task.getName() + " | ID: " + task.getId() +
                     "\nCantidad de empleados: " + task.getEmployees().size() + " Estado: " + task.getStatus());
                 }
-                input.nextLine();
+                MessagePrinter.log();
                 start(project);
                 return;
             }
             case 3:{
+                Clear.clearScreen();
                 for (Task task : project.getTasks()){
                     System.out.println("\nNombre: " + task.getName() + " | ID: " + task.getId() +
                     "\nEstado: " + task.getStatus());
                 }
                 System.out.println("Ingrese ID de tarea: ");
-
                 try{
                     int id_Task = input.nextInt();
                     input.nextLine();
-                    if(id_Task >= 1 && id_Task <= project.getTasks().size()){
-                        Task task = project.getTaskByID(id_Task);
+                    Task task = project.getTaskByID(id_Task);
+
+                    if(task != null){
                         System.out.println("Nuevo estado para tarea " + task.getName() +
                         "\n1.PENDIENTE" +
                         "\n2.EN CURSO" +
                         "\n3.FINALIZADA");
                         int newStatus = input.nextInt();
-                        switch (newStatus) {
+                        input.nextLine();
+                        String status;
+                        switch (newStatus){
                             case 1:
-                                task.changeStatus("PENDIENTE");
+                                status = "PENDIENTE";
+                                task.changeStatus(status);
                                 break;
                             case 2:
-                                task.changeStatus("EN CURSO");
+                                status = "EN CURSO";
+                                task.changeStatus(status);
                                 break;
                             case 3:
-                                task.changeStatus("FINALIZADA");
+                                status = "FINALIZADA";
+                                task.changeStatus(status);
                                 break;
                             default:
-                            System.out.println("Valor ingresado inválido");
+                                status = null;
+                                MessagePrinter.error();
                                 break;
                         }
+                        if(status != null){
+                            MessagePrinter.log("Estado de " + task.getName() + " cambiado a " + status);
+                        }
                     } else{
-                        System.out.println("Por favor, ingrese un número dentro del rango 1 y " + project.getTasks().size());
+                        MessagePrinter.error();
                     }
                 }catch (InputMismatchException e) {
-                    System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                    input.next();
+                    MessagePrinter.error();
                 }
-                input.nextLine();
                 start(project);
                 return;
             }
             case 4:{
+                Clear.clearScreen();
                 for (Task task : project.getTasks()){
                     System.out.println("\nNombre: " + task.getName() + " | ID: " + task.getId());
                 }
@@ -103,26 +121,28 @@ public class SubMenuGestionTareas {
                 try{
                     int id_Task = input.nextInt();
                     input.nextLine();
-                    if(id_Task >= 1 && id_Task <= project.getTasks().size()){
-                        Task task = project.getTaskByID(id_Task);
+                    Task task = project.getTaskByID(id_Task);
+                    if(task != null){
                         System.out.println("Seleccione método de asignación: ");
                         System.out.println("1. Asignación directa");
                         System.out.println("2. Asignación aleatoria");
                         int assignmentMethod = input.nextInt();
                         input.nextLine();
-                            switch (assignmentMethod) {
+                            switch(assignmentMethod){
                                 case 1:
                                     task.setAssignmentStrategy(new DirectAssignmentStrategy());
                                     break;
                                 case 2:
                                     task.setAssignmentStrategy(new RandomAssignmentStrategy());
                                     task.assignEmployee(null);
+                                    start(project);
                                     return;
                                 default:
-                                    System.out.println("Método de asignación no válido. Se usará asignación directa por defecto.");
-                                    task.setAssignmentStrategy(new DirectAssignmentStrategy());
+                                    MessagePrinter.error("Método de asignación no válido. Se usará asignación aleatoria por defecto");
+                                    task.setAssignmentStrategy(new RandomAssignmentStrategy());
                                     break;
                             }
+                        Clear.clearScreen();
                         System.out.println("Asignar tarea " + task.getName() + " al empleado:");
                         for (Employee employee : project.getEmployees()) {
                             System.out.println("Nombre: " + employee.getName() + " | DNI: " + employee.getDni());
@@ -133,21 +153,20 @@ public class SubMenuGestionTareas {
                             Employee employee = project.getEmployeeByDNI(dni_Employee);
                             task.assignEmployee(employee);
                         }catch(NullPointerException e){
-                            System.out.println("No se encontró un empleado con ese DNI.");
-                            return;
+                            MessagePrinter.error("No se encontró un empleado con ese DNI");
+                            break;
                         }
                     }else{
-                        System.out.println("Por favor, ingrese un número dentro del rango 1 y " + project.getTasks().size());
+                        MessagePrinter.error();
                     }
                 }catch (InputMismatchException e) {
-                    System.out.println("Entrada inválida. Por favor, ingrese un número.");
-                    input.next();
+                    MessagePrinter.error();
                 }
-                input.nextLine();
                 start(project);
                 return;
                 }
             case 5:{
+                Clear.clearScreen();
                 for (Task task : project.getTasks()){
                     System.out.println("\nNombre: " + task.getName() + " | ID: " + task.getId());
                 }
@@ -155,11 +174,16 @@ public class SubMenuGestionTareas {
                 int id_Task = input.nextInt();
                 input.nextLine();
                 Task task = project.getTaskByID(id_Task);
-                System.out.println("Empleados de la tarea " + task.getName());
-                for (Employee employee : task.getEmployees()){
-                    System.out.println("\nNombre: " + employee.getName() + " | Email: " + employee.getEmail());
+                if(task != null){
+                    Clear.clearScreen();
+                    System.out.println("Empleados de la tarea " + task.getName());
+                    for (Employee employee : task.getEmployees()){
+                        System.out.println("\nNombre: " + employee.getName() + " | Email: " + employee.getEmail());
+                    }
+                    MessagePrinter.log();
+                }else{
+                    MessagePrinter.error("No se ha encontrado una tarea con ese ID");
                 }
-                input.nextLine();
                 start(project);
                 return;
             }

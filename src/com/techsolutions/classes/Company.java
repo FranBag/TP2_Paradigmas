@@ -38,7 +38,7 @@ public class Company{
     }
 
     public void createProject(String name){
-        int id = projects.size() + 1;
+        int id = getSizeProjects() + 1;
         projects.add(new Project(name, id));
     }
     public List<Project> getProjects() {
@@ -108,12 +108,14 @@ public class Company{
         return null;
     }
 
-
-    public int getSizeManagers(){
-        return managers.size();
+    public int getSizeProjects(){
+        return projects.size();
     }
     public int getSizeCustomers(){
         return customers.size();
+    }
+    public int getSizeManagers(){
+        return managers.size();
     }
     public int getSizeEmployees(){
         return employees.size();

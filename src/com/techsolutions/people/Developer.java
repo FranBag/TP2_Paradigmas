@@ -8,10 +8,12 @@ public class Developer extends Employee{
     
     @Override
     public void trabajar(){
+        System.out.println("Estoy desarrollando un programa.");
     }
 
-    /////////////////////////////
-    //   TERMINAR DE PONER TRABAJAR PARA CADA EPLEADOS
-    /////////////////////////////
+    @Override
+    public String getRole(){
+        return "Developer";
+    }
 
 }

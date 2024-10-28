@@ -44,14 +44,10 @@ public class TxtFileAdapter {
 
                     System.out.println(name);
 
-                    try{
-                        Employee employee = EmployeeFactory.createEmployee(name, dni, phone, email, role);
-                        company.addEmployee(employee);
-                        System.out.println(project);
-                        company.getProjectByName(project).addEmployee(employee);
-                    }catch(MyException e){
-                        System.out.println("Ocurrió un error");
-                    }
+                    Employee employee = EmployeeFactory.createEmployee(name, dni, phone, email, role);
+                    company.addEmployee(employee);
+                    System.out.println(project);
+                    company.getProjectByName(project).addEmployee(employee);
                 }
             }
         } catch (IOException e) {

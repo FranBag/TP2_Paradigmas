@@ -8,6 +8,11 @@ public class Tester extends Employee{
 
     @Override
     public void trabajar(){
-        
+        System.out.println("Estoy testeando un programa.");
+    }
+
+    @Override
+    public String getRole(){
+        return "Tester";
     }
 }
