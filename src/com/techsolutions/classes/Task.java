@@ -39,7 +39,12 @@ public class Task implements Subject{
 
     public void assignEmployee(Employee employee) {
         assignmentStrategy.assignTask(this, employee);
-        attach(employee);
+        System.out.println(assignmentStrategy.getClass());
+        if(assignmentStrategy.getClass().toString().equals("class classes.RandomAssignmentStrategy")){
+            return;
+        }else{
+            attach(employee);
+        }
     }
 
     public void setAssignmentStrategy(TaskAssignmentStrategy strategy) {

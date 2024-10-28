@@ -18,6 +18,7 @@ public class RandomAssignmentStrategy implements TaskAssignmentStrategy{
         Employee indexEmployee= task.getProject().getEmployees().get(index);
         indexEmployee.addMyTask(task);
         task.addEmployee(indexEmployee);
-        System.out.println("La tarea '" + task.getName() + "' ha sido asignada de forma aleatoria a " + indexEmployee.getName());
+        task.attach(indexEmployee);
+        MessagePrinter.log("La tarea '" + task.getName() + "' ha sido asignada de forma aleatoria a " + indexEmployee.getName());
     }
 }

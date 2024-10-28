@@ -1,5 +1,6 @@
 import classes.Company;
 import classes.Project;
+import classes.RandomAssignmentStrategy;
 import classes.Task;
 import utilities.Clear;
 import utilities.TxtFileAdapter;
@@ -46,16 +47,23 @@ public class app {
         // Añadiendo empleados, gerente y cliente a proyectos
         proyecto1.addEmployee(empleado1);
         empleado1.setProject(proyecto1);
+        Company.getInstance().addEmployee(empleado1);
+
         proyecto1.addEmployee(empleado2);
         empleado2.setProject(proyecto1);
+        Company.getInstance().addEmployee(empleado2);
+
         proyecto1.addEmployee(empleado3);
         empleado3.setProject(proyecto1);
+        Company.getInstance().addEmployee(empleado3);
 
         proyecto1.setManager(gerente);
         gerente.setProject(proyecto1);
+        Company.getInstance().addManager(gerente);
 
         proyecto1.setCustomer(cliente);
         cliente.setProject(proyecto1);
+        Company.getInstance().addCustomer(cliente);
 
         // Añadiendo tareas a empleados
         tarea1.attach(empleado1); 
