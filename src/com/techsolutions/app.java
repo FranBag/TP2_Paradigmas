@@ -1,6 +1,5 @@
 import classes.Company;
 import classes.Project;
-import classes.RandomAssignmentStrategy;
 import classes.Task;
 import utilities.Clear;
 import utilities.TxtFileAdapter;
@@ -79,7 +78,7 @@ public class app {
         empleado3.addMyTask(tarea3);
 
 
-
+        // Bucle principal del menú
         while (true) {
             Clear.clearScreen();
             System.out.println("Bienvenido al sistema de la empresa " + company.getName());

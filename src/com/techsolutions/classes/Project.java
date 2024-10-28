@@ -9,7 +9,9 @@ import people.Customer;
 import people.Employee;
 import people.Manager;
 
+
 public class Project{
+    // Atributos de la clase proyecto.
     private int id;
     private String name;
     private Manager manager;
@@ -17,6 +19,7 @@ public class Project{
     private Customer customer;
     private List<Task> tasks = new ArrayList<>();
 
+    // Constructor de la clase.
     public Project(String name, int id){
         this.name = name;
         this.id = id;
@@ -49,13 +52,13 @@ public class Project{
     public void addEmployee(Employee employee) {
         employees.add(employee);
     }
-    public Employee getEmployeeByDNI(String dni){
+    public Employee getEmployeeByDNI(String dni){  // Obtiene un proyecto según el ID.
         for(Employee employee: employees){
             if(employee.getDni().equals(dni)){
                 return employee;
             }
         }
-        return null;
+        return null; // Si no lo encuentra devuelve null.
     }
 
     public Customer getCustomer() {
@@ -76,17 +79,17 @@ public class Project{
         Task newTask = new Task(taskId, taskName);
         tasks.add(newTask);
         newTask.setProject(this);
-        System.out.println("Tarea '" + taskName + "' creada en el proyecto '" + name + "'.");
     }
-    public Task getTaskByID(int id){
+    public Task getTaskByID(int id){  // Obtiene un proyecto según el ID.
         for(Task task: tasks){
             if(task.getId() == id){
                 return task;
             }
         }
-        return null;
+        return null; // Si no lo encuentra devuelve null.
     }
 
+    // Muestra el resumen de los proyectos.
     public void showProjectSummary() {
         System.out.println("Resumen del proyecto: " + name);
         for (Task task : tasks) {
@@ -94,6 +97,7 @@ public class Project{
         }
     }
 
+    // Muestra el conteo de tareas según el estado de un proyecto.
     public Map<String, Integer> getTaskCountByStatus() {
         Map<String, Integer> statusCount = new HashMap<>();
         for (Task task : tasks) {

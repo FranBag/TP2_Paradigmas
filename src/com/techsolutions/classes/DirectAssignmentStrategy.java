@@ -2,6 +2,7 @@ package classes;
 
 import people.Employee;
 
+// Estrategia de asignamiento directo.
 public class DirectAssignmentStrategy implements TaskAssignmentStrategy {
     @Override
     public void assignTask(Task task, Employee employee) {

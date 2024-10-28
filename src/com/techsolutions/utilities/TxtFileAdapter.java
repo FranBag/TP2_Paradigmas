@@ -48,7 +48,8 @@ public class TxtFileAdapter {
                     company.getProjectByName(project).addEmployee(employee);
                 }
             }
-        }catch(IOException e){
+        }
+        catch(IOException e){
             e.printStackTrace();
         }
     }

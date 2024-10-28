@@ -14,7 +14,6 @@ public abstract class Employee extends Person implements Observer{
         super(name, dni, phone, email, id);
         this.tasks = new ArrayList<>();
     }
-    
 
     public abstract void trabajar();
 
