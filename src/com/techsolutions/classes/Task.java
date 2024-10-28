@@ -55,10 +55,10 @@ public class Task implements Subject{
         employees.add(employee);
     }
 
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public String getStatus() { return status; }
-    public List<Employee> getEmployees() { return employees; }
-    public Project getProject() { return project; }
-    public void setProject(Project project) { this.project = project; }
+    public int getId(){ return id; }
+    public String getName(){ return name; }
+    public String getStatus(){ return status; }
+    public List<Employee> getEmployees(){ return employees; }
+    public Project getProject(){ return project; }
+    public void setProject(Project project){ this.project = project; }
 }
