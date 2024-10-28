@@ -10,7 +10,6 @@ import classes.Company;
 
 public class TxtFileAdapter {
 
-    //esto lee el txt, pero debe de estar en el directorio del código para que funcione
     String filePath = "src/com/techsolutions/utilities/Base_de_Datos.txt";
 
     public TxtFileAdapter(){
